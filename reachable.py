@@ -55,6 +55,7 @@ if __name__ == '__main__':
 
     try:
         input_int_list = get_list_from_file(args.file_name, file_format=args.format)
-        result = is_end_reachable(input_int_list)
+        reachable = is_end_reachable(input_int_list)
+        print("Last element is {}reachable from the first element".format('' if reachable else 'not '))
     except InvalidInputError as e:
         print('Error: file {} has invalid input: {}'.format(args.file_name, e))
