@@ -33,14 +33,14 @@ def _find_path(graph):
     return bfs(graph=graph, root=0)
 
 
-def is_end_reachable(int_list):
+def is_end_reachable(int_list, verbose=False):
     _validate_input(int_list)
     graph = _generate_directed_graph(int_list)    # O(n)
     spanning_tree, order = _find_path(graph)      # O(V+E) = O(V+2V) = O(V) = O(n)
     max_index = len(int_list) - 1
-
-    print('list: {}, target is {}, spanning tree from the first element: {}'.format(
-        int_list, max_index, list(spanning_tree.keys())))
+    if verbose:
+        print('list: {}, target is {}, spanning tree from the first element: {}'.format(
+            int_list, max_index, list(spanning_tree.keys())))
     reachable = spanning_tree.get(max_index) is not None
     return reachable
 
@@ -50,12 +50,13 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("file_name")
+    parser.add_argument("--verbose", help="verbose print", action='store_true')
     parser.add_argument("--format", help="json/csv/tsv file formats are supported")
     args = parser.parse_args()
 
     try:
         input_int_list = get_list_from_file(args.file_name, file_format=args.format)
-        reachable = is_end_reachable(input_int_list)
+        reachable = is_end_reachable(input_int_list, verbose=args.verbose)
         print("Last element is {}reachable from the first element".format('' if reachable else 'not '))
     except InvalidInputError as e:
         print('Error: file {} has invalid input: {}'.format(args.file_name, e))
