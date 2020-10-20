@@ -14,9 +14,9 @@ _format_to_delimiter = {
 def get_list_from_file(file_name, file_format=None):
     if file_format is None:
         splitted = file_name.split('.')
-        if len(splitted) != 2:
+        if len(splitted) < 2:
             raise InvalidInputError('no file format provided')
-        file_format = splitted[1]
+        file_format = splitted[-1]
     try:
         with open(file_name, mode='r') as f:
             if file_format == 'json':
