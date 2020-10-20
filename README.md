@@ -1,14 +1,16 @@
 # Installation
 
-  `pip install -r requirements.txt`
+  `pip3 install -r requirements.txt`
 
 # Using the program
-  `python reachable.py my_input.json`
+  `python3 reachable.py my_input.json`
   
 or
   
-  `python reachable.py my_input --format csv`
+  `python3 reachable.py my_input --format csv`
+  
+add `--verbose` for verbose printing
 
 # Running the tests
 
-  `python test/test.py`
+  `python3 test.py`
